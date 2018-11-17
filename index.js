@@ -1,4 +1,5 @@
 const lottery = require('./lottery');
+const _cliProgress = require('cli-progress');
 
 /**
  * Let's play the lottery! Runs x plays per week, with x lines per play, for x years
@@ -8,7 +9,8 @@ const lottery = require('./lottery');
  */
 const playBulk = function (tickets, lines, years) {
   let wins = 0;
-
+  const progress = new _cliProgress.Bar({}, _cliProgress.Presets.shades_classic);
+  progress.start(years * tickets * 52, 0);
   // number of years to play
   for (let j = 0; j < years; j++) {
     for (let w = 0; w < 52; w++) {
@@ -17,10 +19,12 @@ const playBulk = function (tickets, lines, years) {
           const winningNumbers = lottery.getNumbers();
           const playResult = lottery.play(lines, winningNumbers);
           wins += playResult;
+          progress.update(1);
         }
       }
     }
   }
+  progress.stop();
   const cost = (lines * tickets * 52 * years) * 2;
   console.log(`You played the lottery ${lines * tickets * 52 * years} times in ${years} years and managed to win: ${wins} times, this cost you £${cost}`);
 }
@@ -34,4 +38,4 @@ console.log();
 console.log('Lets play the lottery 10 time a week, with 7 lines, for 80 years');
 playBulk(10, 7, 80);
 console.log('Lets play the lottery 1000 time a week, with 7 lines, for 800 years');
-playBulk(1000, 7, 800);
+playBulk(10, 7, 800);
