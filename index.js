@@ -1,5 +1,4 @@
 const lottery = require('./lottery');
-const _cliProgress = require('cli-progress');
 
 /**
  * Let's play the lottery! Runs x plays per week, with x lines per play, for x years
@@ -34,5 +33,8 @@ console.log();
 console.log('Lets play the lottery 10 time a week, with 7 lines, for 80 years');
 playBulk(10, 7, 80);
 console.log();
-console.log('Lets play the lottery 1000 time a week, with 7 lines, for 800 years');
+console.log('Lets play the lottery 10 time a week, with 7 lines, for 800 years');
 playBulk(10, 7, 800);
+console.log();
+console.log('Lets play the lottery 1000 time a week, with 7 lines, for 800 years');
+playBulk(1000, 7, 800);
